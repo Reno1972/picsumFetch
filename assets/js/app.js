@@ -1,5 +1,6 @@
+
 let request = async () => {
-    const response = await fetch(`https://picsum.photos/v2/list?page=40&limit=4`);
+    const response = await fetch(`https://picsum.photos/v2/list?page=40&limit=8`);
     if (response.ok) {
         let json = response.json();
         return Promise.resolve(json);
@@ -19,28 +20,34 @@ request().then(response => {
 })
 
 let sectionSelect = document.querySelector("section");
-let article , image, auteur, bouton;
+let article, paragraf, box , image, auteur, bouton;
 
 function createElements(){
     article = document.createElement("article");
-    auteur = document.createElement("h1");
+    paragraf = document.createElement("p");
+    auteur = document.createElement("h2");
     image= document.createElement("img");
     bouton = document.createElement("a");
+    box = document.createElement("aside")
 };
 
 function cardElements(author, imgId, boutonUrl){
     auteur.textContent = author;
     image.src = `https://picsum.photos/id/${imgId}/600/600`;
-    bouton.textContent = "Voir original";
+    bouton.textContent = "Visit";
     bouton.href = boutonUrl;
 
 }
 
 function appendElements(){
     sectionSelect.append(article);
-    article.append(image); 
-    article.append(auteur);
-    article.append(bouton);
+    article.append(paragraf);
+    article.append(box);
+    paragraf.append(auteur);
+    paragraf.append(bouton);
+    box.append(image); 
+
+
 }
 
 function createPic(author, imgId, boutonUrl){
